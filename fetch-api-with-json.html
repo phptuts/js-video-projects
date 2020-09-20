@@ -38,6 +38,32 @@
     <h1>Famous Quotes</h1>
     <section id="quotes"></section>
     <p id="error">There was an error fetching the request.</p>
-    <script></script>
+    <script>
+      const quotesEl = document.querySelector("#quotes");
+      const errorEl = document.querySelector("#error");
+
+      function addQuote(quote, index) {
+        if (index > 10) {
+          return;
+        }
+        const quoteEl = document.createElement("article");
+        quoteEl.classList.add("quote");
+        quoteEl.textContent = quote.text;
+        quotesEl.appendChild(quoteEl);
+      }
+
+      async function getQuotes() {
+        try {
+          const response = await fetch("https://type.fit/api/quotes");
+          const quotes = await response.json();
+          quotes.forEach(addQuote);
+        } catch (e) {
+          errorEl.style.display = "block";
+          console.error(e);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", getQuotes);
+    </script>
   </body>
 </html>
