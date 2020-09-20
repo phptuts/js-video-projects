@@ -8,7 +8,7 @@
   - [Final Code](https://github.com/phptuts/js-vidoe-project/blob/dynamically-adding-table-row-finish/dynamic-table-row.html)
 
 - How to use the fetch api with a get request
-  - [Youtube Video]()
+  - [Youtube Video](https://youtu.be/NOcuUfppLrg)
   - [Starting Code](https://raw.githubusercontent.com/phptuts/js-video-projects/fetch-get-json-starting/fetch-api-with-json.html)
-  - [Demo]()
-  - [Final Code]()
+  - [Demo](https://phptuts.github.io/js-video-projects/fetch-api-with-json.html)
+  - [Final Code](https://raw.githubusercontent.com/phptuts/js-video-projects/master/fetch-api-with-json.html)
