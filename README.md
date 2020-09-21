@@ -11,11 +11,11 @@
 
   - [Youtube Video](https://www.youtube.com/watch?v=Fek_oJM_s4I&feature=youtu.be)
   - [Starting Code](https://raw.githubusercontent.com/phptuts/js-video-projects/fetch-post-json-start/fetch-api-post.html)
-  - [Demo]()
+  - [Demo](https://phptuts.github.io/js-video-projects/fetch-api-get-json.html)
   - [Final Code](https://raw.githubusercontent.com/phptuts/js-video-projects/master/fetch-api-with-json.html)
 
 - How to use the fetch api with a get request
   - [Youtube Video](https://youtu.be/NOcuUfppLrg)
-  - [Starting Code](https://raw.githubusercontent.com/phptuts/js-video-projects/fetch-get-json-starting/fetch-api-with-json.html)
+  - [Starting Code](https://raw.githubusercontent.com/phptuts/js-video-projects/fetch-post-json-start/fetch-api-post.html)
   - [Demo](https://phptuts.github.io/js-video-projects/fetch-api-post-json.html)
   - [Final Code](https://raw.githubusercontent.com/phptuts/js-video-projects/master/fetch-api-post-json.html)
