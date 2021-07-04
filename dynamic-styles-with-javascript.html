@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <title>Change CSS with JS Picture Changer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Otomanopee One", sans-serif;
+      }
+      h2 {
+        text-align: center;
+      }
+      main {
+        width: 700px;
+        height: 960px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      #picture-space {
+        position: absolute;
+        width: 700px;
+        height: 700px;
+        border: dashed black 2px;
+        background-size: cover;
+        cursor: pointer;
+      }
+
+      #controls {
+        width: 700px;
+        height: 250px;
+        position: absolute;
+        left: 0;
+        top: 710px;
+        border: solid gray 3px;
+      }
+
+      #color-picker {
+        position: absolute;
+        left: 120px;
+        top: 20px;
+      }
+      #filters {
+        position: absolute;
+        width: 250px;
+        height: 40px;
+        left: 350px;
+        top: 30px;
+        padding-left: 17px;
+        outline: none;
+        font-family: "Otomanopee One", sans-serif;
+        font-size: 30px;
+      }
+      footer {
+        margin: 20px auto;
+        width: 700px;
+      }
+      #uplaod-icon {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+      #file-pic {
+          display: none;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+  </head>
+  <body>
+    <h2>
+      Filter Picture
+    </h2>
+    <main id="container">
+      <section id="picture-space">
+        <img
+          src="https://img.icons8.com/material-outlined/96/000000/upload--v1.png"
+          id="uplaod-icon"
+        />
+        <input type="file" id="file-pic">
+      </section>
+      <section id="controls">
+        <div id="color-picker"></div>
+        <select id="filters">
+          <option value="inherit">No Filter</option>
+          <option value="color">luminosity</option>
+          <option value="normal">normal</option>
+          <option value="multiply">multiply</option>
+          <option value="screen">screen</option>
+          <option value="overlay">overlay</option>
+          <option value="darken">darken</option>
+          <option value="lighten">lighten</option>
+          <option value="color-dodge">color-dodge</option>
+          <option value="color-burn">color-burn</option>
+          <option value="hard-light">hard-light</option>
+          <option value="soft-light">soft-light</option>
+          <option value="difference">difference</option>
+          <option value="exclusion">exclusion</option>
+          <option value="hue">hue</option>
+          <option value="color">color</option>
+        </select>
+      </section>
+    </main>
+    <footer>
+      <a href="https://icons8.com/icon/82709/upload">Upload icon by Icons8</a>
+      <script>
+        
+        // HTML Elements
+        const filterEl = document.getElementById('filters');
+        const pictureSpaceEl = document.querySelector('#picture-space');
+        const uploadIconEl = document.querySelector('#upload-icon');
+        const fileUploadIconEl = document.getElementById('uplaod-icon');
+        const fileInputEl = document.querySelector('#file-pic');
+        const fileReader = new FileReader();
+        // configuration
+
+        const expectedFileMimeType = ['image/jpeg', 'image/png'];
+        
+        // Initialize the color picker
+        const colorPicker = new iro.ColorPicker("#color-picker", { width: 150 });
+        
+        // Event Listeners
+
+        // picture space element is click on open the file input dailog box
+        pictureSpaceEl.addEventListener('click', () => {
+            // triggers a click event which causes the file upload dialog box to show
+            fileInputEl.click();
+        })
+
+        // When the color picker changes color change the background color of the picture space element
+        colorPicker.on('color:change', function(color) {
+           // Change the background color of the picture space element 
+           pictureSpaceEl.style.backgroundColor = color.hexString;
+        });
+
+        // When the file input has a picture file use it as background image
+        fileInputEl.addEventListener('change', () => {
+            // Get the first file selected
+            const [file] = fileInputEl.files;
+            
+            // Make sure that it's a valid file and valid file type
+            if (!file || !file instanceof File || expectedFileMimeType.indexOf(file.type) < 0) {
+                return;
+            }
+            // load the file into the file reader
+            fileReader.readAsDataURL(file);
+        });
+
+        // When the file reader loads the image use it to set the background image 
+        fileReader.onload = () => {    
+            // set the picture space background image 
+            pictureSpaceEl.style.backgroundImage = `url('${fileReader.result}')`;
+            // hide the upload icon
+            fileUploadIconEl.style.display = 'none';
+        }
+
+        // When the filter changes change the color
+        filterEl.addEventListener('change', () => {
+            pictureSpaceEl.style.backgroundBlendMode = filterEl.value;
+        })
+        
+        
+        
+      </script>
+    </footer>
+  </body>
+</html>
