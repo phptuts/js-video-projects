@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+
+<!-- CSS Reset -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+
+<!-- Milligram CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+<style>
+    button, canvas {
+        width: 100%;
+        display: block;
+    }
+    video {
+        display: none;
+    }
+    canvas {
+        border: solid 1px red;
+        height: 50vh;
+        margin-top: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+    <main class="container">
+        <section class="row">
+            <div class="column">
+                <h1>Photo Booth</h1>
+            </div>
+        </section>
+        <section class="row">
+            <div class="column">
+                <button class="button">Take Picture</button>
+            </div>
+        </section>
+        <section class="row">
+            <div class="column">
+                <video id="camera">
+
+                </video>
+            </div>
+        </section>
+        <section class="row">
+            <div class="column">
+                <canvas id="picture"></canvas>
+
+            </div>
+        </section>
+    </main>
+    
+
+</body>
+</html>
