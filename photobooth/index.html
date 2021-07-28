@@ -1,63 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Google Fonts -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
 
-<!-- CSS Reset -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <!-- CSS Reset -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
 
-<!-- Milligram CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
-<style>
-    button, canvas {
+    <!-- Milligram CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic" />
+    <style>
+      button,
+      canvas {
         width: 100%;
         display: block;
-    }
-    video {
+      }
+      video {
         display: none;
-    }
-    canvas {
+      }
+      canvas {
         border: solid 1px red;
         height: 50vh;
         margin-top: 20px;
-    }
-    h1 {
+      }
+      h1 {
         text-align: center;
-    }
-</style>
-</head>
-<body>
-
-    <main class="container">
-        <section class="row">
-            <div class="column">
-                <h1>Photo Booth</h1>
-            </div>
-        </section>
-        <section class="row">
-            <div class="column">
-                <button class="button">Take Picture</button>
-            </div>
-        </section>
-        <section class="row">
-            <div class="column">
-                <video id="camera">
-
-                </video>
-            </div>
-        </section>
-        <section class="row">
-            <div class="column">
-                <canvas id="picture"></canvas>
-
-            </div>
-        </section>
+      }
+      main {
+        width: 90%;
+        margin: 0 auto;
+      }
+      main.hide {
+        opacity: 0.1;
+      }
+      #cover {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(17, 13, 13);
+        opacity: 0.7;
+        display: none;
+      }
+      #cover.show {
+        display: block;
+      }
+      #countdown {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        font-size: 200px;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cover">
+      <span id="countdown">1</span>
+    </div>
+    <main>
+      <section class="flex">
+        <div>
+          <h1>Photo Booth</h1>
+        </div>
+      </section>
+      <section class="flex">
+        <div>
+          <button class="success">Take Picture</button>
+        </div>
+      </section>
+      <section class="flex">
+        <div>
+          <video id="camera"></video>
+        </div>
+      </section>
+      <section class="flex">
+        <div>
+          <canvas id="picture"></canvas>
+        </div>
+      </section>
     </main>
-    
-
-</body>
+  </body>
 </html>
