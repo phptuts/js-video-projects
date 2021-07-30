@@ -29,12 +29,16 @@
         height: auto;
         background-color: white;
         position: fixed;
-        top: 50%;
+        top: -50%;
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
         z-index: 3;
         border-radius: 10px;
         padding: 10px;
+      }
+      .modal.open {
+        transition: ease-in-out top 2s;
+        top: 50%;
       }
     </style>
   </head>
@@ -52,5 +56,10 @@
       </div>
     </div>
     <div id="background-cover"></div>
+    <script>
+      setTimeout(() => {
+        document.querySelector(".modal").classList.add("open");
+      }, 2000);
+    </script>
   </body>
 </html>
