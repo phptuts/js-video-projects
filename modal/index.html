@@ -6,6 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
+
+      body {
+        font-family: "Noto Sans JP", sans-serif;
+      }
+
+      main {
+        width: 80%;
+        height: 95%;
+        position: absolute;
+        top: 5%;
+        left: 10%;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 3em;
+      }
+
+      button {
+        width: 100%;
+        outline: none;
+        font-size: 2em;
+        cursor: pointer;
+      }
+
+      main.blur {
+        filter: blur(4px);
+      }
+
       #background-cover {
         background-color: rgb(145, 145, 145);
         opacity: 0.7;
@@ -15,15 +45,10 @@
         left: 0;
         width: 100%;
         height: 100%;
+        display: none;
+        cursor: pointer;
       }
-      main {
-        filter: blur(4px);
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
+
       .modal {
         width: 500px;
         height: auto;
@@ -35,20 +60,51 @@
         z-index: 3;
         border-radius: 10px;
         padding: 10px;
+        padding: 0;
+        transition: ease-in-out top 0.5s;
       }
+
       .modal.open {
-        transition: ease-in-out top 2s;
-        top: 50%;
+        transition: ease-in-out top 0.7s;
+        top: 30%;
+      }
+
+      .modal-head h2 {
+        margin-top: 10px;
+        margin-bottom: 0;
+      }
+      .modal span.close {
+        position: absolute;
+        top: 8px;
+        right: 20px;
+        font-size: 20px;
+        color: rgb(119, 119, 119);
+        cursor: pointer;
+        user-select: none;
+      }
+      .modal span.close:hover {
+        color: black;
+      }
+      .modal-head {
+        padding-bottom: 5px;
+        padding-left: 20px;
+        border-bottom: solid #675f5f 1px;
+      }
+
+      .modal-content {
+        padding-left: 20px;
       }
     </style>
   </head>
   <body>
     <main>
-      <h1>Hello World</h1>
-      <p>This is a test</p>
+      <h1>Modal Demo</h1>
+      <p><button>Show Modal</button></p>
     </main>
+
     <div class="modal active">
-      <div class="modal-title">
+      <span class="close">x</span>
+      <div class="modal-head">
         <h2>Title</h2>
       </div>
       <div class="modal-content">
@@ -57,9 +113,27 @@
     </div>
     <div id="background-cover"></div>
     <script>
-      setTimeout(() => {
-        document.querySelector(".modal").classList.add("open");
-      }, 2000);
+      const buttonEl = document.querySelector("button");
+      const mainEl = document.querySelector("main");
+      const modalEl = document.querySelector(".modal");
+      const closeEl = document.querySelector(".close");
+      const backgroundCoverEl = document.querySelector("#background-cover");
+
+      function showModal() {
+        mainEl.classList.add("blur");
+        backgroundCoverEl.style.display = "block";
+        modalEl.classList.add("open");
+      }
+
+      function closeModal() {
+        mainEl.classList.remove("blur");
+        backgroundCoverEl.style.display = "none";
+        modalEl.classList.remove("open");
+      }
+
+      buttonEl.addEventListener("click", showModal);
+      closeEl.addEventListener("click", closeModal);
+      backgroundCoverEl.addEventListener("click", closeModal);
     </script>
   </body>
 </html>
