@@ -24,10 +24,11 @@
         width: 100%;
         display: block;
       }
-      video {
+      canvas {
         display: none;
       }
-      canvas {
+      canvas,
+      video {
         border: solid 1px red;
         height: 50vh;
         margin-top: 20px;
@@ -77,7 +78,9 @@
       </section>
       <section class="flex">
         <div>
-          <button class="success">Take Picture</button>
+          <button onclick="turnOnCamera()" class="primary">
+            Turn Camera On
+          </button>
         </div>
       </section>
       <section class="flex">
@@ -91,5 +94,22 @@
         </div>
       </section>
     </main>
+    <script>
+      var video = document.querySelector("#camera");
+
+      function turnOnCamera() {
+        if (navigator.mediaDevices.getUserMedia) {
+          navigator.mediaDevices
+            .getUserMedia({ video: true })
+            .then(function (stream) {
+              video.srcObject = stream;
+              video.play();
+            })
+            .catch(function (err0r) {
+              console.log("Something went wrong!");
+            });
+        }
+      }
+    </script>
   </body>
 </html>
