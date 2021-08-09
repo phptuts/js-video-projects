@@ -32,6 +32,7 @@
         border: solid 1px red;
         height: 50vh;
         margin-top: 20px;
+        width: 100%;
       }
       h1 {
         text-align: center;
@@ -78,7 +79,7 @@
       </section>
       <section class="flex">
         <div>
-          <button onclick="turnOnCamera()" class="primary">
+          <button onclick="toggleCamera()" class="primary" id="camera-btn">
             Turn Camera On
           </button>
         </div>
@@ -96,19 +97,26 @@
     </main>
     <script>
       var video = document.querySelector("#camera");
-
-      function turnOnCamera() {
-        if (navigator.mediaDevices.getUserMedia) {
-          navigator.mediaDevices
-            .getUserMedia({ video: true })
-            .then(function (stream) {
-              video.srcObject = stream;
-              video.play();
-            })
-            .catch(function (err0r) {
-              console.log("Something went wrong!");
-            });
+      var toggleCameraBtn = document.querySelector("#camera-btn");
+      var isCameraOn = false;
+      function toggleCamera() {
+        if (!navigator.mediaDevices.getUserMedia) {
+          alert("No Camera Support!");
+          return;
         }
+
+        navigator.mediaDevices
+          .getUserMedia({ video: true })
+          .then(function (stream) {
+            video.srcObject = stream;
+            video.play();
+            toggleCameraBtn.classList.remove("success");
+            toggleCameraBtn.classList.add("error");
+            toggleCameraBtn.textContent = "Turn off camera";
+          })
+          .catch(function (error) {
+            console.log("Something went wrong!");
+          });
       }
     </script>
   </body>
