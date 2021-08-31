@@ -105,18 +105,40 @@
           return;
         }
 
+        if (isCameraOn) {
+            const mediaStream = video.srcObject;
+
+            // Through the MediaStream, you can get the MediaStreamTracks with getTracks():
+            const tracks = mediaStream.getTracks();
+
+            // Tracks are returned as an array, so if you know you only have one, you can stop it with: 
+            tracks[0].stop();
+
+            // Or stop all like so:
+            tracks.forEach(track => track.stop());
+            
+            toggleCameraBtn.classList.remove("error");
+            toggleCameraBtn.classList.add("primary");
+            toggleCameraBtn.textContent = "Turn Camera On";
+            isCameraOn = false;
+
+            return;
+        }
+
         navigator.mediaDevices
           .getUserMedia({ video: true })
           .then(function (stream) {
             video.srcObject = stream;
             video.play();
-            toggleCameraBtn.classList.remove("success");
+            toggleCameraBtn.classList.remove("primary");
             toggleCameraBtn.classList.add("error");
-            toggleCameraBtn.textContent = "Turn off camera";
+            toggleCameraBtn.textContent = "Turn Off Camera";
+            isCameraOn = true;
           })
           .catch(function (error) {
             console.log("Something went wrong!");
           });
+        
       }
     </script>
   </body>
