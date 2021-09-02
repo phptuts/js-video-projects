@@ -33,6 +33,7 @@
         height: 50vh;
         margin-top: 20px;
         width: 100%;
+        display: none;
       }
       h1 {
         text-align: center;
@@ -56,6 +57,9 @@
       }
       #cover.show {
         display: block;
+      }
+      #take-picture-btn {
+        display: none;
       }
       #countdown {
         position: fixed;
@@ -86,6 +90,13 @@
       </section>
       <section class="flex">
         <div>
+          <button onclick="takePicture()" class="success" id="take-picture-btn">
+            Take Picture
+          </button>
+        </div>
+      </section>
+      <section class="flex">
+        <div>
           <video id="camera"></video>
         </div>
       </section>
@@ -96,49 +107,51 @@
       </section>
     </main>
     <script>
-      var video = document.querySelector("#camera");
-      var toggleCameraBtn = document.querySelector("#camera-btn");
+      var video = document.querySelector('#camera');
+      var toggleCameraBtn = document.querySelector('#camera-btn');
       var isCameraOn = false;
-      function toggleCamera() {
+      async function toggleCamera() {
         if (!navigator.mediaDevices.getUserMedia) {
-          alert("No Camera Support!");
+          alert('No Camera Support!');
           return;
         }
 
         if (isCameraOn) {
-            const mediaStream = video.srcObject;
+          const mediaStream = video.srcObject;
 
-            // Through the MediaStream, you can get the MediaStreamTracks with getTracks():
-            const tracks = mediaStream.getTracks();
+          // Through the MediaStream, you can get the MediaStreamTracks with getTracks():
+          const tracks = mediaStream.getTracks();
 
-            // Tracks are returned as an array, so if you know you only have one, you can stop it with: 
-            tracks[0].stop();
+          // Tracks are returned as an array, so if you know you only have one, you can stop it with:
+          tracks[0].stop();
 
-            // Or stop all like so:
-            tracks.forEach(track => track.stop());
-            
-            toggleCameraBtn.classList.remove("error");
-            toggleCameraBtn.classList.add("primary");
-            toggleCameraBtn.textContent = "Turn Camera On";
-            isCameraOn = false;
+          // Or stop all like so:
+          tracks.forEach((track) => track.stop());
 
-            return;
+          // Toggles the button
+          toggleCameraBtn.classList.remove('error');
+          toggleCameraBtn.classList.add('primary');
+          toggleCameraBtn.textContent = 'Turn Camera On';
+          isCameraOn = false;
+          video.style.display = 'none';
+
+          return;
         }
 
-        navigator.mediaDevices
-          .getUserMedia({ video: true })
-          .then(function (stream) {
-            video.srcObject = stream;
-            video.play();
-            toggleCameraBtn.classList.remove("primary");
-            toggleCameraBtn.classList.add("error");
-            toggleCameraBtn.textContent = "Turn Off Camera";
-            isCameraOn = true;
-          })
-          .catch(function (error) {
-            console.log("Something went wrong!");
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
           });
-        
+          video.srcObject = stream;
+          video.play();
+          toggleCameraBtn.classList.remove('primary');
+          toggleCameraBtn.classList.add('error');
+          toggleCameraBtn.textContent = 'Turn Off Camera';
+          isCameraOn = true;
+          video.style.display = 'block';
+        } catch (e) {
+          console.log('Something went wrong!');
+        }
       }
     </script>
   </body>
