@@ -2,6 +2,9 @@
 
 In this lesson we'll be modal with HTML, CSS, and javascript.
 
+Demo
+https://phptuts.github.io/js-video-projects/modal/index.html
+
 00:00 Demo
 00:14 Base HTML For Non Modal
 
