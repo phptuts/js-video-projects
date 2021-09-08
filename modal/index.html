@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modal Example</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Modal Demo</h1>
+      <p><button>Show Modal</button></p>
+    </main>
+    <div id="background-cover"></div>
+    <div class="modal">
+      <span class="close">x</span>
+      <div class="modal-head">
+        <h2>Title</h2>
+      </div>
+      <div class="modal-content">
+        <p>This is example text</p>
+      </div>
+    </div>
+    <script>
+      const buttonEl = document.querySelector('button');
+      const mainEl = document.querySelector('main');
+      const modalEl = document.querySelector('.modal');
+      const closeEl = document.querySelector('.close');
+      const backgroundCoverEl = document.querySelector('#background-cover');
+
+      function showModal() {
+        mainEl.classList.add('blur');
+        backgroundCoverEl.style.display = 'block';
+        modalEl.classList.add('open');
+      }
+
+      function closeModal() {
+        mainEl.classList.remove('blur');
+        backgroundCoverEl.style.display = 'none';
+        modalEl.classList.remove('open');
+      }
+
+      // Event Listeners
+      buttonEl.addEventListener('click', showModal);
+      closeEl.addEventListener('click', closeModal);
+      backgroundCoverEl.addEventListener('click', closeModal);
+    </script>
+  </body>
+</html>
