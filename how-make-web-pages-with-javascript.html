@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Javascript Webpage?</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+
+    <!-- CSS Reset -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+
+    <!-- Milligram CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+    />
+    <style>
+      body {
+        color: black;
+      }
+      h1 {
+        text-align: center;
+      }
+      ol {
+        font-size: 1.3em;
+      }
+      button {
+        width: 100%;
+        margin: auto;
+      }
+      #example {
+        position: fixed;
+        top: 450px;
+        left: 50px;
+        border: solid gray 2px;
+        width: 400px;
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <h1>How to make a webpage dynamic with javascript?</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <button id="btn" class="button">Click Me</button>
+        </div>
+      </div>
+      <div class="row">
+        <ol>
+          <li>Create your HTML variables</li>
+          <li>Create a function that responds to an event</li>
+          <li>Attach that function to an event listener</li>
+          <li>Change the html element's style</li>
+        </ol>
+      </div>
+      <div id="example"></div>
+    </div>
+    <script>
+      // 1. Create your HTML variables
+      const btnEl = document.querySelector('#btn');
+      const divEl = document.getElementById('example');
+
+      // 2. Create a function that responds to an event
+      function onClickEvent() {
+        // 4. Change the html element's style
+        divEl.style.backgroundColor = 'red';
+      }
+
+      // 3. Attach that function to an event listener
+      btnEl.addEventListener('click', onClickEvent);
+    </script>
+  </body>
+</html>
