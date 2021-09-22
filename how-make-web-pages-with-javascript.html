@@ -38,7 +38,8 @@
       #example {
         position: fixed;
         top: 450px;
-        left: 50px;
+        left: 50%;
+        transform: translateX(-50%);
         border: solid gray 2px;
         width: 400px;
         height: 400px;
@@ -53,33 +54,51 @@
         </div>
       </div>
       <div class="row">
-        <div class="column">
-          <button id="btn" class="button">Click Me</button>
-        </div>
-      </div>
-      <div class="row">
         <ol>
-          <li>Create your HTML variables</li>
+          <li>Create variables to store your HTML elements.</li>
           <li>Create a function that responds to an event</li>
           <li>Attach that function to an event listener</li>
-          <li>Change the html element's style</li>
+          <li>Change the html element's style in the function you created.</li>
         </ol>
+      </div>
+      <div class="row">
+        <div class="column">
+          <button id="btn" class="button">Reset</button>
+        </div>
       </div>
       <div id="example"></div>
     </div>
     <script>
-      // 1. Create your HTML variables
-      const btnEl = document.querySelector('#btn');
+      // 1. Create variables to store your HTML elements.
       const divEl = document.getElementById('example');
+      const resetBtn = document.querySelector('#btn');
+
+      let degrees = 0;
 
       // 2. Create a function that responds to an event
-      function onClickEvent() {
-        // 4. Change the html element's style
-        divEl.style.backgroundColor = 'red';
+      function onChange(event) {
+        const percentX = event.offsetX / 396;
+        const percentY = event.offsetY / 396;
+        const red = percentX * 255;
+        const blue = percentY * 255;
+        // 4. Change the html element's style in the function you created.
+        divEl.style.backgroundColor = `rgb(${red}, 0, ${blue})`;
+
+        divEl.style.borderRadius = `${percentX * 50}%`;
+        degrees += event.movementY;
+        divEl.style.transform = `translateX(-50%) rotate(${degrees}deg)`;
+      }
+
+      function reset() {
+        divEl.style.backgroundColor = '#FFF';
+        divEl.style.transform = `translateX(-50%)`;
+        divEl.style.borderRadius = '0';
+        degrees = 0;
       }
 
       // 3. Attach that function to an event listener
-      btnEl.addEventListener('click', onClickEvent);
+      divEl.addEventListener('mousemove', onChange);
+      resetBtn.addEventListener('click', reset);
     </script>
   </body>
 </html>
